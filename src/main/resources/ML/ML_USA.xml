@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ons version="3.0" type="eonsim" raPacket="ra.ML">
+<!--    <ra module="FF_Dis"/>-->
+    <!--<ra module="FF_Dis_SaveFile"/>-->
+    <ra module="FF_ML"/>
+
+    <trace file="trace.tr"/>
+    <traffic calls="100000" load="300" cos="1" statisticStart="0">
+        <!--
+        <calls holding-time="1" rate="12500" cos="0" weight="1"/>
+        <calls holding-time="1" rate="25000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="37500" cos="0" weight="1"/>
+        <calls holding-time="1" rate="50000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="62500" cos="0" weight="1"/>
+        <calls holding-time="1" rate="75000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="87500" cos="0" weight="1"/>
+        <calls holding-time="1" rate="100000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="112500" cos="0" weight="1"/>
+        <calls holding-time="1" rate="125000" cos="0" weight="1"/>
+        -->
+
+        <!-- Cenario para o SNR-ML-->
+        <!--
+        <calls holding-time="1" rate="25000" cos="0" weight="6"/>
+        <calls holding-time="1" rate="50000" cos="0" weight="5"/>
+        <calls holding-time="1" rate="100000" cos="0" weight="4"/>
+        <calls holding-time="1" rate="200000" cos="0" weight="3"/>
+        <calls holding-time="1" rate="300000" cos="0" weight="2"/>
+        <calls holding-time="1" rate="400000" cos="0" weight="1"/>
+        -->
+
+        <!-- Cenario para o globecom 2020 uniforme!!! Fazer o grafico de Quantos LPs foram tonificados-->
+
+        <calls holding-time="1" rate="10000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="40000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="100000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="160000" cos="0" weight="1"/>
+        <calls holding-time="1" rate="400000" cos="0" weight="1"/>
+
+        <!--<pair ids="0" idd="1" weight="10"/>-->
+    </traffic>
+
+    <virtual-topology  name="USANet">
+	<!--For create lightpaths-->
+	<!--<lightpath src="0" dst="1" links="0" wavelengths="1,2" /> For ONS-WDM-->
+        <!--<lightpath src="0" dst="1" links="2,7" wavelengths="1,2" /> For ONS-WDM-->
+        <!--<lightpath src="0" dst="1" links="0" firstSlot="0" lastSlot="1" modulation="BPSK" reserved="true"/>-->
+        <!--<lightpath src="0" dst="1" links="2,7" firstSlot="0" lastSlot="1" modulation="BPSK"/>-->
+    </virtual-topology>
+
+    <physical-impairment
+        physical-distance="no" SNRaware="yes" checkQoT="yes"
+        activeAse="yes" activeNli="yes" NF="6" centerFrequency="193.0E+12" alfa="0.2" beta2="16.0E-24" gama="1.22" C="1.0"
+        XTaware="yes" dynamicNeighborNumber="yes" XTonOthers="yes"
+        k="3.16E-5" r="0.055" beta="4.0E6" w_tr="45.0E-6">
+
+        <modulation name="BPSK" SNRthreshold="6.0" PC="112.374" maxReach="8000"/>
+    	<modulation name="QPSK" SNRthreshold="9.0" PC="133.416" maxReach="4000"/>
+    	<modulation name="8QAM" SNRthreshold="12.0" PC="154.457" maxReach="2000"/>
+    	<modulation name="16QAM" SNRthreshold="15.0" PC="175.498" maxReach="1000"/>
+    	<modulation name="32QAM" SNRthreshold="18.0" PC="196.539" maxReach="500"/>
+    	<modulation name="64QAM" SNRthreshold="21.0" PC="217.581" maxReach="250"/>
+        
+        <!--<modulation name="BPSK" SNRthreshold="6.0" PC="112.374" maxReach="12000"/>
+    	<modulation name="QPSK" SNRthreshold="9.0" PC="133.416" maxReach="6000"/>
+    	<modulation name="8QAM" SNRthreshold="12.0" PC="154.457" maxReach="3000"/>
+    	<modulation name="16QAM" SNRthreshold="15.0" PC="175.498" maxReach="1500"/>
+    	<modulation name="32QAM" SNRthreshold="18.0" PC="196.539" maxReach="750"/>
+    	<modulation name="64QAM" SNRthreshold="21.0" PC="217.581" maxReach="375"/>-->
+        
+    </physical-impairment>
+
+    <physical-topology name="USANet"
+        mensageProcessingTime="1.0E-5" configurationTimeOXC="1.0E-5" propagationDelayTime="4.0E-4"
+        switchTime="5.0E-4" oxcTransitionTime="4.5E-4" oxcSleepModeExpenditure="10.0"
+        oxcOperationExpenditure="150.0" oxcNodeDegreeExpenditure="85.0" oxcAddDropDegreeExpenditure="100.0"
+        trOverloadExpenditure="1.683" trIdleExpenditure="91.333"
+        olaExpenditure="100.0"
+        spanSize="100">
+
+        <nodes modulations="BPSK, QPSK, 8QAM, 16QAM, 32QAM, 64QAM" capacity="32">
+            <node id="0" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="1" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="2" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="3" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="4" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="5" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="6" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="7" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="8" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="9" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="10" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="11" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="12" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="13" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="14" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="15" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="16" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="17" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="18" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="19" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="20" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="21" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="22" grooming-in-ports="4000" grooming-out-ports="4000" />
+            <node id="23" grooming-in-ports="4000" grooming-out-ports="4000" />
+        </nodes>
+
+        <links slots="320" guardband="2" slot-size="12500">
+            <link id="0" source="0" destination="1" delay="4" weight="800"/>
+            <link id="1" source="1" destination="0" delay="4" weight="800"/>
+            <link id="2" source="0" destination="5" delay="5" weight="1000"/>
+            <link id="3" source="5" destination="0" delay="5" weight="1000"/>
+            <link id="4" source="1" destination="2" delay="5.5" weight="1100"/>
+            <link id="5" source="2" destination="1" delay="5.5" weight="1100"/>
+            <link id="6" source="1" destination="5" delay="4.75" weight="950"/>
+            <link id="7" source="5" destination="1" delay="4.75" weight="950"/>
+            <link id="8" source="2" destination="3" delay="1.25" weight="250"/>
+            <link id="9" source="3" destination="2" delay="1.25" weight="250"/>
+            <link id="10" source="2" destination="4" delay="4" weight="800"/>
+            <link id="11" source="4" destination="2" delay="4" weight="800"/>
+            <link id="12" source="2" destination="6" delay="5" weight="1000"/>
+            <link id="13" source="6" destination="2" delay="5" weight="1000"/>
+            <link id="14" source="3" destination="4" delay="4" weight="800"/>
+            <link id="15" source="4" destination="3" delay="4" weight="800"/>
+            <link id="16" source="3" destination="6" delay="4.25" weight="850"/>
+            <link id="17" source="6" destination="3" delay="4.25" weight="850"/>
+            <link id="18" source="4" destination="7" delay="6" weight="1200"/>
+            <link id="19" source="7" destination="4" delay="6" weight="1200"/>
+            <link id="20" source="5" destination="6" delay="5" weight="1000"/>
+            <link id="21" source="6" destination="5" delay="5" weight="1000"/>
+            <link id="22" source="5" destination="8" delay="6" weight="1200"/>
+            <link id="23" source="8" destination="5" delay="6" weight="1200"/>
+            <link id="24" source="5" destination="10" delay="9.5" weight="1900"/>
+            <link id="25" source="10" destination="5" delay="9.5" weight="1900"/>
+            <link id="26" source="6" destination="7" delay="5.75" weight="1150"/>
+            <link id="27" source="7" destination="6" delay="5.75" weight="1150"/>
+            <link id="28" source="6" destination="8" delay="5" weight="1000"/>
+            <link id="29" source="8" destination="6" delay="5" weight="1000"/>
+            <link id="30" source="7" destination="9" delay="4.5" weight="900"/>
+            <link id="31" source="9" destination="7" delay="4.5" weight="900"/>
+            <link id="32" source="8" destination="9" delay="5" weight="1000"/>
+            <link id="33" source="9" destination="8" delay="5" weight="1000"/>
+            <link id="34" source="8" destination="10" delay="7" weight="1400"/>
+            <link id="35" source="10" destination="8" delay="7" weight="1400"/>
+            <link id="36" source="8" destination="11" delay="5" weight="1000"/>
+            <link id="37" source="11" destination="8" delay="5" weight="1000"/>
+            <link id="38" source="9" destination="12" delay="4.75" weight="950"/>
+            <link id="39" source="12" destination="9" delay="4.75" weight="950"/>
+            <link id="40" source="9" destination="13" delay="4.25" weight="850"/>
+            <link id="41" source="13" destination="9" delay="4.25" weight="850"/>
+            <link id="42" source="10" destination="11" delay="4.5" weight="900"/>
+            <link id="43" source="11" destination="10" delay="4.5" weight="900"/>
+            <link id="44" source="10" destination="14" delay="6.5" weight="1300"/>
+            <link id="45" source="14" destination="10" delay="6.5" weight="1300"/>
+            <link id="46" source="10" destination="18" delay="13" weight="2600"/>
+            <link id="47" source="18" destination="10" delay="13" weight="2600"/>
+            <link id="48" source="11" destination="12" delay="4.5" weight="900"/>
+            <link id="49" source="12" destination="11" delay="4.5" weight="900"/>
+            <link id="50" source="11" destination="15" delay="5" weight="1000"/>
+            <link id="51" source="15" destination="11" delay="5" weight="1000"/>
+            <link id="52" source="12" destination="13" delay="3.25" weight="650"/>
+            <link id="53" source="13" destination="12" delay="3.25" weight="650"/>
+            <link id="54" source="12" destination="16" delay="5.5" weight="1100"/>
+            <link id="55" source="16" destination="12" delay="5.5" weight="1100"/>
+            <link id="56" source="13" destination="17" delay="6" weight="1200"/>
+            <link id="57" source="17" destination="13" delay="6" weight="1200"/>
+            <link id="58" source="14" destination="15" delay="3" weight="600"/>
+            <link id="59" source="15" destination="14" delay="3" weight="600"/>
+            <link id="60" source="14" destination="19" delay="6.5" weight="1300"/>
+            <link id="61" source="19" destination="14" delay="6.5" weight="1300"/>
+            <link id="62" source="15" destination="16" delay="5" weight="1000"/>
+            <link id="63" source="16" destination="15" delay="5" weight="1000"/>
+            <link id="64" source="15" destination="20" delay="5" weight="1000"/>
+            <link id="65" source="20" destination="15" delay="5" weight="1000"/>
+            <link id="66" source="15" destination="21" delay="4" weight="800"/>
+            <link id="67" source="21" destination="15" delay="4" weight="800"/>
+            <link id="68" source="16" destination="17" delay="4" weight="800"/>
+            <link id="69" source="17" destination="16" delay="4" weight="800"/>
+            <link id="70" source="16" destination="21" delay="4.25" weight="850"/>
+            <link id="71" source="21" destination="16" delay="4.25" weight="850"/>
+            <link id="72" source="16" destination="22" delay="5" weight="1000"/>
+            <link id="73" source="22" destination="16" delay="5" weight="1000"/>
+            <link id="74" source="17" destination="23" delay="4.5" weight="900"/>
+            <link id="75" source="23" destination="17" delay="4.5" weight="900"/>
+            <link id="76" source="18" destination="19" delay="6" weight="1200"/>
+            <link id="77" source="19" destination="18" delay="6" weight="1200"/>
+            <link id="78" source="19" destination="20" delay="3.5" weight="700"/>
+            <link id="79" source="20" destination="19" delay="3.5" weight="700"/>
+            <link id="80" source="20" destination="21" delay="1.5" weight="300"/>
+            <link id="81" source="21" destination="20" delay="1.5" weight="300"/>
+            <link id="82" source="21" destination="22" delay="3" weight="600"/>
+            <link id="83" source="22" destination="21" delay="3" weight="600"/>
+            <link id="84" source="22" destination="23" delay="4.5" weight="900"/>
+            <link id="85" source="23" destination="22" delay="4.5" weight="900"/>
+        </links>
+    </physical-topology>
+</ons>
