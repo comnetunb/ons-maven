@@ -3,7 +3,7 @@
 <ons version="3.0" type="eonsim" raPacket="ra.ML">
 <!--    <ra module="FF_Dis"/>-->
     <!--<ra module="FF_Dis_SaveFile"/>-->
-    <ra module="FF_ML"/>
+    <ra module="FF_Classifier"/>
 
     <trace file="trace.tr"/>
     <traffic calls="100000" load="300" cos="1" statisticStart="0">
