@@ -8,10 +8,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class OnnxModel<IT, OT> implements Model<IT, OT> {
+public abstract class OnnxLocalModel<IT, OT> extends LocalModel<IT, OT> {
     protected OrtSession session;
     protected OrtEnvironment environment;
     protected String inputName;
+
+    public OnnxLocalModel() {
+        super(ModelFramework.ONNX_RUNTIME);
+    }
 
     public void load(String path) throws IOException, OrtException {
         load(path, ModelFormat.ONNX);
@@ -34,5 +38,6 @@ public abstract class OnnxModel<IT, OT> implements Model<IT, OT> {
         environment = OrtEnvironment.getEnvironment();
         session = environment.createSession(is.readAllBytes());
         inputName = session.getInputNames().iterator().next();
+        ready = true;
     }
 }

@@ -9,8 +9,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class Dl4jModel<IT, OT> implements Model<IT, OT> {
+public abstract class Dl4JLocalModel<IT, OT> extends LocalModel<IT, OT> {
     protected MultiLayerNetwork model;
+
+    public Dl4JLocalModel() {
+        super(ModelFramework.DEEPLEARNING4J);
+    }
 
     public void load(String path) throws IOException, InvalidKerasConfigurationException, UnsupportedKerasConfigurationException {
         load(path, ModelFormat.HDF5);
@@ -28,6 +32,7 @@ public abstract class Dl4jModel<IT, OT> implements Model<IT, OT> {
     public void load(InputStream is, ModelFormat format) throws UnsupportedKerasConfigurationException, IOException, InvalidKerasConfigurationException {
         if (format == ModelFormat.HDF5) {
             this.model = KerasModelImport.importKerasSequentialModelAndWeights(is);
+            ready = true;
         } else {
             throw new UnsupportedOperationException("Unsupported format");
         }
