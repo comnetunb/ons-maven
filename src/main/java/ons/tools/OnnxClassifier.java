@@ -7,7 +7,7 @@ import ons.util.ml.OnnxLocalModel;
 
 import java.util.Collections;
 
-public class OnnxClassifier extends OnnxLocalModel<float[][], Integer> {
+public class OnnxClassifier extends OnnxLocalModel<float[][], Number> {
     public Integer _predict(float[][] testData) throws OrtException {
         try (OnnxTensor test = OnnxTensor.createTensor(this.environment, testData);
              OrtSession.Result output = this.session.run(Collections.singletonMap(this.inputName, test))) {

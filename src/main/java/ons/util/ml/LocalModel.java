@@ -4,10 +4,11 @@ import java.io.InputStream;
 
 public abstract class LocalModel<IT, OT> implements Model<IT, OT> {
     protected final ModelFramework modelFramework;
-    protected boolean ready = false;
+    protected boolean ready;
 
     protected LocalModel(final ModelFramework modelFramework) {
         this.modelFramework = modelFramework;
+        this.ready = false;
     }
 
     abstract void load(String path) throws Exception;

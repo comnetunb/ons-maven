@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 
 import ons.ra.RA;
+import ons.util.ml.HttpRemoteModel;
 import ons.util.ml.LocalModel;
+import ons.util.ml.Model;
 
 /**
  * The proposed m-Adap by Xin Wan in this RSA solver.
@@ -33,6 +35,7 @@ public class FF_Classifier implements RA {
     private MyStatistics st = MyStatistics.getMyStatisticsObject();
     private final Dl4jClassifier dl4jClassifier = new Dl4jClassifier();
     private final OnnxClassifier onnxClassifier = new OnnxClassifier();
+    private final HttpRemoteModel<float[][], Number> remoteClassifier = new HttpRemoteModel<>("http://localhost:8080");
 
     @Override
     public void simulationInterface(ControlPlaneForRA cp) {
@@ -87,6 +90,7 @@ public class FF_Classifier implements RA {
         var state = getLinksState();
         classify(dl4jClassifier, state);
         classify(onnxClassifier, state);
+        classify(remoteClassifier, state);
 
         ArrayList<Integer>[] kpaths = YenKSP.kShortestPaths(graph, flow.getSource(), flow.getDestination(), ksp);
 
@@ -171,14 +175,19 @@ public class FF_Classifier implements RA {
     public void flowDeparture(long id) {
     }
 
-    private void classify(LocalModel<float[][], Integer> model, float[][] input) {
+    private void classify(Model<float[][], Number> model, float[][] input) {
         try {
             var startTime = System.nanoTime();
             var rate = model.predict(input);
             var endTime = System.nanoTime();
             var duration = (endTime - startTime) / 1000;
-            System.out.printf("Current alg has rate %d according to %s, took %dus%n",
-                    rate, model.getModelFramework().toString(),duration);
+            if (rate instanceof Double) {
+                System.out.printf("Current alg has rate %d according to %s, took %dus%n",
+                        Math.round((Double) rate), model.getModelFramework().toString(),duration);
+            } else {
+                System.out.printf("Current alg has rate %d according to %s, took %dus%n",
+                        (Integer) rate, model.getModelFramework().toString(),duration);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
