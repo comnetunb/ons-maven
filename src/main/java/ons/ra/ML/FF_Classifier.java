@@ -1,6 +1,5 @@
 package ons.ra.ML;
 
-import ai.onnxruntime.OrtException;
 import ons.EONLightPath;
 import ons.EONLink;
 import ons.LightPath;
@@ -15,13 +14,11 @@ import ons.tools.OnnxClassifier;
 import ons.util.WeightedGraph;
 import ons.util.YenKSP;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
 import ons.ra.RA;
 import ons.util.ml.HttpRemoteModel;
-import ons.util.ml.LocalModel;
 import ons.util.ml.Model;
 
 /**

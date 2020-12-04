@@ -9,10 +9,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class Dl4JLocalModel<IT, OT> extends LocalModel<IT, OT> {
+public abstract class Dl4jNativeModel<IT, OT> extends NativeModel<IT, OT> {
     protected MultiLayerNetwork model;
 
-    public Dl4JLocalModel() {
+    public Dl4jNativeModel() {
         super(ModelFramework.DEEPLEARNING4J);
     }
 

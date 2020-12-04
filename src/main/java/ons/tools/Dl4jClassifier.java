@@ -1,9 +1,9 @@
 package ons.tools;
 
-import ons.util.ml.Dl4JLocalModel;
+import ons.util.ml.Dl4jNativeModel;
 import org.nd4j.linalg.factory.Nd4j;
 
-public class Dl4jClassifier extends Dl4JLocalModel<float[][], Number> {
+public class Dl4jClassifier extends Dl4jNativeModel<float[][], Number> {
     protected Integer _predict(float[][] testData) {
         var input = Nd4j.create(testData);
         var x = this.model.output(input);

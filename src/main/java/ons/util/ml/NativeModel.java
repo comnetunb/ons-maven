@@ -2,19 +2,19 @@ package ons.util.ml;
 
 import java.io.InputStream;
 
-public abstract class LocalModel<IT, OT> implements Model<IT, OT> {
+public abstract class NativeModel<IT, OT> implements Model<IT, OT> {
     protected final ModelFramework modelFramework;
     protected boolean ready;
 
-    protected LocalModel(final ModelFramework modelFramework) {
+    protected NativeModel(final ModelFramework modelFramework) {
         this.modelFramework = modelFramework;
         this.ready = false;
     }
 
-    abstract void load(String path) throws Exception;
-    abstract void load(String path, ModelFormat format) throws Exception;
-    abstract void load(InputStream inputStream) throws Exception;
-    abstract void load(InputStream inputStream, ModelFormat format) throws Exception;
+    public abstract void load(String path) throws Exception;
+    public abstract void load(String path, ModelFormat format) throws Exception;
+    public abstract void load(InputStream inputStream) throws Exception;
+    public abstract void load(InputStream inputStream, ModelFormat format) throws Exception;
 
     protected abstract OT _predict(IT input) throws Exception;
 

@@ -8,12 +8,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class OnnxLocalModel<IT, OT> extends LocalModel<IT, OT> {
+public abstract class OnnxNativeModel<IT, OT> extends NativeModel<IT, OT> {
     protected OrtSession session;
     protected OrtEnvironment environment;
     protected String inputName;
 
-    public OnnxLocalModel() {
+    public OnnxNativeModel() {
         super(ModelFramework.ONNX_RUNTIME);
     }
 

@@ -1,6 +1,5 @@
 package ons.util.ml;
 
-
 import com.google.gson.Gson;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpResponseException;
